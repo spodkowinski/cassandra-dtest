@@ -33,6 +33,7 @@ logger = logging.getLogger(__name__)
 class TestCqlsh(Tester):
 
     @classmethod
+    @pytest.fixture(scope='function', autouse=True)
     def setUpClass(cls):
         cls._cached_driver_methods = monkeypatch_driver()
         if locale.getpreferredencoding() != 'UTF-8':
