@@ -75,6 +75,8 @@ def pytest_addoption(parser):
                           "after the test completes")
     parser.addoption("--enable-jacoco-code-coverage", action="store_true", default=False,
                      help="Enable JaCoCo Code Coverage Support")
+    parser.addoption("--execute-cqlsh-tests", action="store_true", default=False,
+                     help="Execute Cassandra CQLSH Tests (e.g. tests annotated with the cqlsh_test mark)")
 
 
 def sufficient_system_resources_for_resource_intensive_tests():
@@ -467,6 +469,10 @@ def pytest_collection_modifyitems(items, config):
 
         if item.get_closest_marker("upgrade_test"):
             if not config.getoption("--execute-upgrade-tests"):
+                deselect_test = True
+
+        if item.get_closest_marker("cqlsh_test"):
+            if not config.getoption("--execute-cqlsh-tests"):
                 deselect_test = True
 
         if item.get_closest_marker("no_offheap_memtables"):

@@ -30,6 +30,7 @@ since = pytest.mark.since
 logger = logging.getLogger(__name__)
 
 
+@pytest.mark.cqlsh_test
 class TestCqlsh(Tester):
 
     @classmethod
@@ -1776,6 +1777,7 @@ Tracing session:""")
         return p.communicate()
 
 
+@pytest.mark.cqlsh_test
 class TestCqlshSmoke(Tester):
     """
     Tests simple use cases for clqsh.
@@ -2048,6 +2050,7 @@ class TestCqlshSmoke(Tester):
         return [table.name for table in list(self.session.cluster.metadata.keyspaces[keyspace].tables.values())]
 
 
+@pytest.mark.cqlsh_test
 class TestCqlLogin(Tester):
     """
     Tests login which requires password authenticator

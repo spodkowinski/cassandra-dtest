@@ -59,6 +59,7 @@ class UTC(datetime.tzinfo):
         return datetime.timedelta(0)
 
 
+@pytest.mark.cqlsh_test
 class TestCqlshCopy(Tester):
     """
     Tests the COPY TO and COPY FROM features in cqlsh.
